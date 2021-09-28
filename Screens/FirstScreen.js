@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
@@ -6,21 +6,28 @@ import MyTextInput from '../Componenets/MyTextInput';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 
-const onConfirmPressed = () => {
-    console.log("*Confirm")
-}
-const onResetPressed = () => {
-    console.log("*Reset")
-}
+
 
 const FirstScreen = props => {
+
+    const [inputValue, updateInputValue] = useState("")
+
+    const onChangeTextListener = (text) => { updateInputValue(text); }
+
+    const onConfirmPressed = () => {
+        console.log("*Confirm")
+    }
+    const onResetPressed = () => {
+        console.log("*Reset")
+    }
+
     return (
         <View style={styles.root}>
             <Text style={styles.title}>Start a New Game!</Text>
 
             <Card>
                 <Text >Select a Number:</Text>
-                <MyTextInput hint="enter a number" />
+                <MyTextInput hint="enter a number" onChangeText={onChangeTextListener} />
                 <View style={styles.buttonsHolder}>
 
                     <MyButton style={{ ...styles.button, ...styles.buttonReset }} title="Reset" onPress={onResetPressed} />
