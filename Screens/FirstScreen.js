@@ -15,7 +15,7 @@ const FirstScreen = props => {
     const onChangeTextListener = (text) => { updateInputValue(text); }
 
     const onConfirmPressed = () => {
-        console.log("*Confirm")
+        console.log(inputValue)
     }
     const onResetPressed = () => {
         console.log("*Reset")
@@ -27,7 +27,7 @@ const FirstScreen = props => {
 
             <Card>
                 <Text >Select a Number:</Text>
-                <MyTextInput hint="enter a number" onChangeText={onChangeTextListener} keyboardType="number-pad"/>
+                <MyTextInput placeholder="enter a number" onChangeText={onChangeTextListener} keyboardType="number-pad"/>
                 <View style={styles.buttonsHolder}>
 
                     <MyButton style={{ ...styles.button, ...styles.buttonReset }} title="Reset" onPress={onResetPressed} />
