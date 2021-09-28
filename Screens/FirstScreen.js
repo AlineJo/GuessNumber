@@ -27,7 +27,7 @@ const FirstScreen = props => {
 
             <Card>
                 <Text >Select a Number:</Text>
-                <MyTextInput hint="enter a number" onChangeText={onChangeTextListener} />
+                <MyTextInput hint="enter a number" onChangeText={onChangeTextListener} keyboardType="number-pad"/>
                 <View style={styles.buttonsHolder}>
 
                     <MyButton style={{ ...styles.button, ...styles.buttonReset }} title="Reset" onPress={onResetPressed} />
