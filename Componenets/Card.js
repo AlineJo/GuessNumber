@@ -1,34 +1,38 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native'
-
+import Colors from '../Constants/Colors'
+import Spacing from '../Constants/Spacing';
 
 const Card = props => {
     return (
-    <View style={{...styles.card, ...props.style}}>
-        {props.children}
-    </View>);
-}; 
+        <View style={{ ...styles.card, ...props.style }}>
+            {props.children}
+        </View>);
+};
 
 
 const styles = StyleSheet.create({
-
     card: {
-        backgroundColor: 'white',
+        marginTop: Spacing.space_32,
+        width: Spacing.spacePercent_95,
+        paddingHorizontal: Spacing.space_16,
+        paddingVertical: Spacing.space_32,
+        backgroundColor: Colors.colorWhite,
 
-        borderRadius: 8,
-        borderTopColor: '#f8f8f8',
-        borderStartColor: '#f8f8f8',
-        borderEndColor: '#f0f0f0',
-        borderBottomColor: '#f0f0f0',
+        borderRadius: Spacing.spaceCardRaduis,
+        borderTopColor: Colors.colorCardBorderColor,
+        borderStartColor: Colors.colorCardBorderColor,
+        borderEndColor: Colors.colorCardBorderColor2,
+        borderBottomColor: Colors.colorCardBorderColor2,
         borderWidth: 1,
 
-        elevation: 8,
-        shadowColor: "black",
+        elevation: Spacing.spaceCardElevation,
+        shadowColor: Colors.colorBlack,
         shadowOffset: {
-            width: 4,
-            height: 4,
+            width: Spacing.space_4,
+            height: Spacing.space_4
         },
-        shadowRadius: 8,
+        shadowRadius: Spacing.spaceCardRaduis,
         shadowOpacity: 0.26
     },
 
