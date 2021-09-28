@@ -4,9 +4,10 @@ import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 
 
+
 const MyTextInput = props => {
     return (
-    <TextInput placeholder={props.hint} style={styles.input} />
+        <TextInput placeholder={props.hint} style={{ ...styles.input, ...props.style }} onChangeText={props.onChangeText}/>
     )
 };
 
