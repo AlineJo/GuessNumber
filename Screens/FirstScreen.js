@@ -1,36 +1,30 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import Card from '../Componenets/Card';
+import MyButton from '../Componenets/MyButton';
+import MyTextInput from '../Componenets/MyTextInput';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 
+const onConfirmPressed = () => {
+    console.log("*Confirm")
+}
+const onResetPressed = () => {
+    console.log("*Reset")
+}
 
 const FirstScreen = props => {
     return (
         <View style={styles.root}>
             <Text style={styles.title}>Start a New Game!</Text>
 
-            <Card style={styles.card}>
-                
+            <Card>
                 <Text >Select a Number:</Text>
-                <TextInput placeholder="enter a number" style={styles.input} />
-
+                <MyTextInput hint="enter a number" />
                 <View style={styles.buttonsHolder}>
 
-                    
-                        <TouchableOpacity style={styles.button} onPress={()=>console.log('Reset')} >
-                            <View style={[styles.buttonCancel]}>
-                                <Text style={[styles.buttonText]}>Reset</Text>
-                            </View>
-                        </TouchableOpacity>
-                  
-
-
-                    <TouchableOpacity style={styles.button} onPress={()=>console.log('Confirm')} >
-                        <View style={[styles.buttonPrimary]}>
-                            <Text style={[styles.buttonText]}>Confirm</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <MyButton style={{ ...styles.button, ...styles.buttonReset }} title="Reset" onPress={onResetPressed} />
+                    <MyButton style={styles.button} title="Confirm" onPress={onConfirmPressed} />
 
                 </View>
 
@@ -54,22 +48,9 @@ const styles = StyleSheet.create({
         fontSize: Spacing.fontSize_18,
     },
 
-    card: {
-
-       
-    },
-
-    input: {
-        height: Spacing.spaceInputHeight,
-        width: Spacing.spacePercent_100,
-        marginTop: Spacing.space_10,
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.colorInputBorder,
-    },
-
     buttonsHolder: {
         width: Spacing.spacePercent_100,
-        paddingHorizontal:Spacing.space_4,
+        paddingHorizontal: Spacing.space_4,
         flexDirection: 'row',
         alignItems: "center",
         justifyContent: "space-between",
@@ -77,23 +58,11 @@ const styles = StyleSheet.create({
 
     button: {
         marginTop: Spacing.space_32,
-        width: Spacing.spacePercent_40,
+        width: 132,
     },
 
-    buttonText: {
-        color: Colors.colorWhite,
-        textAlign: "center",
-        fontWeight: "bold"
-    },
-
-    buttonCancel: {
-        paddingVertical: Spacing.space_8,
+    buttonReset: {
         backgroundColor: Colors.colorButtonCancel
-    },
-
-    buttonPrimary: {
-        paddingVertical: Spacing.space_8,
-        backgroundColor: Colors.colorButtonPrimary
     },
 
 });
