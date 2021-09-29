@@ -4,10 +4,12 @@ import {
     StyleSheet,
     TouchableWithoutFeedback,
     Keyboard,
-    Alert
+    Alert,
+    Button
 } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
+import MyNumberContainer from '../Componenets/MyNumberContainer';
 import MyTextInput from '../Componenets/MyTextInput';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
@@ -42,16 +44,14 @@ const FirstScreen = props => {
         }
         setChoosenNumber(enteredNumber)
         updateInputValue('');
-        setIsConfirmed(true)
+        setIsConfirmed(true);
+        Keyboard.dismiss();
     }
     let confiremedOutput
     if (isConfirmed) {
         confiremedOutput =
-            <Card style={styles.card}>
-                <Text style={styles.confiremedOutput}>
-                    The choosen Number is: {choosenNumber}
-                </Text>
-            </Card>
+        <MyNumberContainer cardTitle="You selected:"
+         value={choosenNumber} buttonTitle="Start Game"/>;
     }
 
     return (
@@ -118,13 +118,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.colorButtonCancel
     },
 
-    card: { paddingVertical: Spacing.space_8 },
 
-    confiremedOutput: {
-        color: Colors.colorGray,
-        fontWeight: 'bold',
-        textAlign: "center"
-    },
 
 });
 
