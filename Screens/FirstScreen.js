@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import {
+    View, Text,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    Keyboard
+} from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
 import MyTextInput from '../Componenets/MyTextInput';
@@ -12,7 +17,9 @@ const FirstScreen = props => {
 
     const [inputValue, updateInputValue] = useState("")
 
-    const onChangeTextListener = (text) => { updateInputValue(text); }
+    const onChangeTextListener = text => {
+        updateInputValue(text.replace(/[^0-9]/g, ''));
+    }
 
     const onConfirmPressed = () => {
         console.log(inputValue)
@@ -22,24 +29,37 @@ const FirstScreen = props => {
     }
 
     return (
-        <View style={styles.root}>
-            <Text style={styles.title}>Start a New Game!</Text>
+        <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss();}}>
 
-            <Card>
-                <Text >Select a Number:</Text>
-                <MyTextInput placeholder="enter a number" onChangeText={onChangeTextListener} keyboardType="number-pad"/>
-                <View style={styles.buttonsHolder}>
+            <View style={styles.root}>
+                <Text style={styles.title}>Start a New Game!</Text>
 
-                    <MyButton style={{ ...styles.button, ...styles.buttonReset }} title="Reset" onPress={onResetPressed} />
-                    <MyButton style={styles.button} title="Confirm" onPress={onConfirmPressed} />
+                <Card>
+                    <Text >Select a Number:</Text>
+                    <MyTextInput
+                        placeholder="enter a number"
+                        onChangeText={onChangeTextListener}
+                        keyboardType="number-pad"
+                        blurOnSubmit
+                        autoCorrect={false}
+                        maxLength={6}
+                        value={inputValue}
+                    />
+                    <View style={styles.buttonsHolder}>
 
-                </View>
+                        <MyButton style={{ ...styles.button, ...styles.buttonReset }} title="Reset" onPress={onResetPressed} />
+                        <MyButton style={styles.button} title="Confirm" onPress={onConfirmPressed} />
 
-            </Card>
+                    </View>
+
+                </Card>
 
 
 
-        </View>);
+            </View>
+
+        </TouchableWithoutFeedback>
+    );
 };
 
 
