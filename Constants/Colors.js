@@ -2,6 +2,8 @@
 const Colors = {
 
     colorPrimary:'#34EE99',
+    colorSecondary:'#3499EE',
+
     colorActionBarTitleColor:'white',
 
     colorButtonPrimary:'#34EE99',
