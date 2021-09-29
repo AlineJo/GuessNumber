@@ -10,6 +10,7 @@ const Colors = {
 
     colorBlack: 'black',
     colorWhite: 'white',
+    colorGray: 'gray',
 
     colorCardBorderColor:'#f8f8f8',
     colorCardBorderColor2:'#f0f0f0',
