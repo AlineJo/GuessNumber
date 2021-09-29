@@ -3,7 +3,8 @@ import {
     View, Text,
     StyleSheet,
     TouchableWithoutFeedback,
-    Keyboard
+    Keyboard,
+    Alert
 } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
@@ -12,8 +13,11 @@ import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 
 
-
 const FirstScreen = props => {
+
+    const [isConfirmed, setIsConfirmed] = useState(false)
+
+    const [choosenNumber, setChoosenNumber] = useState()
 
     const [inputValue, updateInputValue] = useState("")
 
@@ -21,17 +25,40 @@ const FirstScreen = props => {
         updateInputValue(text.replace(/[^0-9]/g, ''));
     }
 
-    const onConfirmPressed = () => {
-        console.log(inputValue)
-    }
     const onResetPressed = () => {
         updateInputValue('');
+        setIsConfirmed(false)
+    }
+
+    const onConfirmPressed = () => {
+
+        const enteredNumber = parseInt(inputValue)
+        if (isNaN(enteredNumber) || enteredNumber < 0 || enteredNumber > 99) {
+            Alert.alert(
+                "Invalid number",
+                "Please enter a number between 0 and 99 (inclusive)",
+                [{ text: 'Ok', style: 'distructive', onPress: onResetPressed }]);
+            return;
+        }
+        setChoosenNumber(enteredNumber)
+        updateInputValue('');
+        setIsConfirmed(true)
+    }
+    let confiremedOutput
+    if (isConfirmed) {
+        confiremedOutput =
+            <Card style={styles.card}>
+                <Text style={styles.confiremedOutput}>
+                    The choosen Number is: {choosenNumber}
+                </Text>
+            </Card>
     }
 
     return (
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
 
             <View style={styles.root}>
+
                 <Text style={styles.title}>Start a New Game!</Text>
                 <Card>
                     <Text >Select a Number:</Text>
@@ -41,7 +68,7 @@ const FirstScreen = props => {
                         keyboardType="number-pad"
                         blurOnSubmit
                         autoCorrect={false}
-                        maxLength={6}
+                        maxLength={2}
                         value={inputValue}
                     />
                     <View style={styles.buttonsHolder}>
@@ -53,7 +80,7 @@ const FirstScreen = props => {
 
                 </Card>
 
-
+                {confiremedOutput}
 
             </View>
 
@@ -89,6 +116,14 @@ const styles = StyleSheet.create({
 
     buttonReset: {
         backgroundColor: Colors.colorButtonCancel
+    },
+
+    card: { paddingVertical: Spacing.space_8 },
+
+    confiremedOutput: {
+        color: Colors.colorGray,
+        fontWeight: 'bold',
+        textAlign: "center"
     },
 
 });
