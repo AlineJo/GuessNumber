@@ -4,7 +4,12 @@ const Spacing = {
     space_8:8,
     space_10:10,
     space_16:16,
+    space_24:24,
     space_32:32,
+    space_40:40,
+    space_96:96,
+    space_104:104,
+
 
     spaceActionBarPaddingTop:42,
     spaceActionBarHeight:76,
@@ -19,8 +24,7 @@ const Spacing = {
     spacePercent_95:'95%',
     spacePercent_100:'100%',
 
-
-
+    
     fontSize_18 :18,
 }
 
