@@ -25,15 +25,14 @@ const FirstScreen = props => {
         console.log(inputValue)
     }
     const onResetPressed = () => {
-        console.log("*Reset")
+        updateInputValue('');
     }
 
     return (
-        <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss();}}>
+        <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
 
             <View style={styles.root}>
                 <Text style={styles.title}>Start a New Game!</Text>
-
                 <Card>
                     <Text >Select a Number:</Text>
                     <MyTextInput
