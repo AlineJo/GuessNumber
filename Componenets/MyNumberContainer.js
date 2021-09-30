@@ -1,24 +1,30 @@
 import React from 'react';
-import {View, Text,StyleSheet} from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 import Card from './Card';
 import MyButton from './MyButton';
 
 
-const MyNumberContainer = props=>{
-    return(
-    <Card style={styles.card}>
-        <Text style={styles.confiremedOutput}>
-            {props.cardTitle}
-        </Text>
-        <View style={styles.numberContainer}>
-            <Text style={styles.numberTextStyle}>{props.value}</Text>
-        </View>
-        
-        <MyButton style={{...styles.cardButton, ...props.styleButton}} title={props.buttonTitle} />
+const MyNumberContainer = props => {
 
-    </Card>);
+    let button
+    if (props.buttonVisible) {
+        button = <MyButton style={{ ...styles.cardButton, ...props.styleButton }} title={props.buttonTitle} />
+    }
+
+    return (
+        <Card style={{...styles.card, ...props.cardStyle}}>
+            <Text style={styles.confiremedOutput}>
+                {props.cardTitle}
+            </Text>
+            <View style={styles.numberContainer}>
+                <Text style={styles.numberTextStyle}>{props.value}</Text>
+            </View>
+
+            {button}
+
+        </Card>);
 };
 
 
@@ -28,7 +34,7 @@ const styles = StyleSheet.create({
         height: 156,
         width: 200,
         paddingVertical: Spacing.space_8,
-        alignItems:'center',
+        alignItems: 'center',
 
     },
 
@@ -37,16 +43,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: "center"
     },
-    
+
 
     numberContainer: {
         height: Spacing.space_40,
         width: Spacing.space_40,
         borderRadius: Spacing.space_32,
         marginTop: Spacing.space_16,
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:Colors.colorWhite,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: Colors.colorWhite,
 
         elevation: Spacing.spaceCardElevation,
         shadowColor: Colors.colorBlack,
