@@ -51,7 +51,9 @@ const FirstScreen = props => {
     if (isConfirmed) {
         confiremedOutput =
         <MyNumberContainer cardTitle="You selected:"
-         value={choosenNumber} buttonTitle="Start Game"/>;
+         value={choosenNumber} buttonTitle="Start Game"
+         buttonVisible={true}
+         />;
     }
 
     return (
