@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react';
+import { View, StyleSheet, Alert } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
 import MyNumberContainer from '../Componenets/MyNumberContainer'
@@ -17,26 +17,48 @@ const generateRandomBetween = (min, max) => {
 }
 
 const GameScreen = props => {
+    const currentLow = useRef(0)
+    const currentHigh = useRef(100)
 
-    const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(0, 100))
+    const [currentGuess, setCurrentGuess] =
+     useState(generateRandomBetween(currentLow.current, currentHigh.current))
 
 
     const onLowerPressed = () => {
-
+        if (currentGuess > props.chosenNumber){
+            currentHigh.current = currentGuess
+            setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current))
+        }else
+            Alert.alert('Common !!!', "Please be honset!!!", [{ text: 'Sorry', style: 'cancel' }]);
     }
 
     const onGreaterPressed = () => {
+        if (currentGuess < props.chosenNumber){
+            currentLow.current = currentGuess
+            setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current))
 
+        }
+        else
+            Alert.alert('Common !!!', "Please be honset!!!", [{ text: 'Sorry', style: 'cancel' }]);
     }
+
+
+    useEffect(()=>{
+        if(currentGuess == props.chosenNumber){
+            // call game over Screen!
+        }
+    })
+
+  
 
     return (<View style={styles.root}>
 
         <MyNumberContainer
             cardStyle={styles.numberContainer}
             cardTitle="NPC guessed :" value={currentGuess} />
-        <Card style={styles.buttonsHolder}>
-            <MyButton style={{ ...styles.button, ...styles.buttonReset }} title="Lower" onPress={onLowerPressed} />
-            <MyButton style={styles.button} title="Greater" onPress={onGreaterPressed} />
+        <Card style={styles.card}>
+            <MyButton style={{ ...styles.button, ...styles.buttonLower }} title="Lower" onPress={onLowerPressed} />
+            <MyButton style={{ ...styles.button, ...styles.buttonGreater }} title="Greater" onPress={onGreaterPressed} />
         </Card>
 
     </View>);
@@ -54,10 +76,10 @@ const styles = StyleSheet.create({
         height: Spacing.space_104,
     },
 
-    buttonsHolder: {
-        width: Spacing.spacePercent_100,
-        height: Spacing.space_104,
-        paddingVertical: Spacing.space_8,
+    card: {
+        width: Spacing.spacePercent_95,
+        height: Spacing.space_96,
+        paddingVertical: Spacing.space_4,
 
         flexDirection: 'row',
         alignItems: "center",
@@ -68,7 +90,10 @@ const styles = StyleSheet.create({
         width: Spacing.space_132,
     },
 
-    buttonReset: {
+    buttonLower: {
+        backgroundColor: Colors.colorButtonPrimary
+    },
+    buttonGreater: {
         backgroundColor: Colors.colorButtonSecondary
     },
 });
