@@ -10,7 +10,12 @@ const MyNumberContainer = props => {
 
     let button
     if (props.buttonVisible) {
-        button = <MyButton style={{ ...styles.cardButton, ...props.styleButton }} title={props.buttonTitle} />
+        button = 
+        <MyButton 
+        style={{ ...styles.cardButton, ...props.styleButton }}
+        title={props.buttonTitle} 
+        onPress={props.onButtonPressed}
+        />
     }
 
     return (
