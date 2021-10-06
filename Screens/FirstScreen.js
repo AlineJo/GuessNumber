@@ -53,6 +53,7 @@ const FirstScreen = props => {
         <MyNumberContainer cardTitle="You selected:"
          value={choosenNumber} buttonTitle="Start Game"
          buttonVisible={true}
+         onButtonPressed={()=> props.onStartGamePressed(choosenNumber)}
          />;
     }
 
