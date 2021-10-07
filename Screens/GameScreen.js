@@ -6,14 +6,17 @@ import MyNumberContainer from '../Componenets/MyNumberContainer'
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 
-const generateRandomBetween = (min, max) => {
+const generateRandomBetween = (min, max, exclude) => {
     min = Math.ceil(min)
     max = Math.floor(max)
 
     // math randow generate random number between 0 - 1
     const randomNumber = Math.floor(Math.random() * (max - min) + min)
 
-    return randomNumber
+    if (randomNumber == exclude) {
+        generateRandomBetween(min, max, exclude)
+    } else
+        return randomNumber
 }
 
 const GameScreen = props => {
@@ -21,35 +24,48 @@ const GameScreen = props => {
     const currentHigh = useRef(100)
 
     const [currentGuess, setCurrentGuess] =
-     useState(generateRandomBetween(currentLow.current, currentHigh.current))
+        useState(generateRandomBetween(currentLow.current, currentHigh.current, -1))
 
 
     const onLowerPressed = () => {
-        if (currentGuess > props.chosenNumber){
+        if (currentGuess > props.chosenNumber) {
             currentHigh.current = currentGuess
-            setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current))
-        }else
+            setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current, currentGuess))
+            props.upadateNumberOfTries();
+
+        } else {
             Alert.alert('Common !!!', "Please be honset!!!", [{ text: 'Sorry', style: 'cancel' }]);
+        }
+
+
     }
 
     const onGreaterPressed = () => {
-        if (currentGuess < props.chosenNumber){
+        if (currentGuess < props.chosenNumber) {
             currentLow.current = currentGuess
-            setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current))
-
+            setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current, currentGuess))
+            props.upadateNumberOfTries();
         }
-        else
+        else {
             Alert.alert('Common !!!', "Please be honset!!!", [{ text: 'Sorry', style: 'cancel' }]);
+        }
     }
 
-
-    useEffect(()=>{
-        if(currentGuess == props.chosenNumber){
-            // call game over Screen!
+    useEffect(() => {
+        if (currentGuess == props.chosenNumber) {
+            Alert.alert(
+                "NPC",
+                "Yay, I guessed the number hahaaa!!!",
+                [
+                    {
+                        text: "wow",
+                        onPress: () => props.onNPCCorrectGuess(),
+                    }
+                ]);
         }
     })
 
-  
+
 
     return (<View style={styles.root}>
 
