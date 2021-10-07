@@ -10,6 +10,7 @@ const Spacing = {
     space_96:96,
     space_104:104,
     space_132:132,
+    space_200:200,
 
 
 
