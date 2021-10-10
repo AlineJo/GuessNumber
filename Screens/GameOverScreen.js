@@ -14,7 +14,7 @@ const GameOverScreen = props => {
             value={props.numberOfTries}
             buttonVisible={true}
             buttonTitle="Try Again"
-            onButtonPressed={props.onTryAgain}
+            onButtonPressed={props.onGameRestart}
         />
 
     </View>);
