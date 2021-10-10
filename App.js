@@ -5,14 +5,43 @@ import Tags from './Constants/Tags';
 import FirstScreen from './Screens/FirstScreen';
 import GameOverScreen from './Screens/GameOverScreen';
 import GameScreen from './Screens/GameScreen';
+import AppLoading from 'expo-app-loading';
+import * as Font from 'expo-font'
+
+
+
+//load fonts
+const fetchFonts = () => {
+  return (Font.loadAsync({
+    'font-robot-light': require('./assets/fonts/Roboto-Light.ttf'),
+    'font-robot-thin': require('./assets/fonts/Roboto-Thin.ttf'),
+  }))
+
+
+}
+
+
 
 export default function App() {
+
+  //state to check if data is ready
+  const [isDataReady, setIsDataReady] = useState(false)
+
+  //show AppLoading if data isn't read!
+  if (!isDataReady) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setIsDataReady(true)}
+        onError={(err) => console.log(err)}
+      />
+    )
+  }
+
 
   const [currentScreen, setCurrentScreen] = useState(Tags.screenContent_FirstScreen)
 
   const [userNumber, setUserNumber] = useState()
-
-
 
   const startGameHandler = (chosenNumber) => {
     setUserNumber(chosenNumber)
