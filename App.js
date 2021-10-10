@@ -16,11 +16,7 @@ const fetchFonts = () => {
     'font-robot-light': require('./assets/fonts/Roboto-Light.ttf'),
     'font-robot-thin': require('./assets/fonts/Roboto-Thin.ttf'),
   }))
-
-
 }
-
-
 
 export default function App() {
 
@@ -32,12 +28,11 @@ export default function App() {
     return (
       <AppLoading
         startAsync={fetchFonts}
-        onFinish={() => setIsDataReady(true)}
+        onFinish={()=> {setIsDataReady(true)}}
         onError={(err) => console.log(err)}
       />
     )
   }
-
 
   const [currentScreen, setCurrentScreen] = useState(Tags.screenContent_FirstScreen)
 
