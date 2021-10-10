@@ -5,12 +5,12 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
     Alert,
-    Button
 } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
 import MyNumberContainer from '../Componenets/MyNumberContainer';
 import MyTextInput from '../Componenets/MyTextInput';
+import MyText from '../Componenets/MyText';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 
@@ -50,18 +50,19 @@ const FirstScreen = props => {
     let confiremedOutput
     if (isConfirmed) {
         confiremedOutput =
-        <MyNumberContainer cardTitle="You selected:"
-         value={choosenNumber} buttonTitle="Start Game"
-         buttonVisible={true}
-         onButtonPressed={()=> props.onStartGamePressed(choosenNumber)}
-         />;
+            <MyNumberContainer cardTitle="You selected:"
+                value={choosenNumber} buttonTitle="Start Game"
+                buttonVisible={true}
+                onButtonPressed={() => props.onStartGamePressed(choosenNumber)}
+            />;
     }
 
     return (
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
 
             <View style={styles.root}>
-
+                <MyText fontFamily='font-robot-thin' ></MyText>
+                <MyText fontFamily='font-robot-light' ></MyText>
                 <Text style={styles.title}>Start a New Game!</Text>
                 <Card>
                     <Text >Select a Number:</Text>
