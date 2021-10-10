@@ -31,7 +31,7 @@ export default function App() {
     setCurrentScreen(Tags.screenContent_GameOverScreen)
   }
 
-  const tryAgainHandler = () => {
+  const onGameRestartHandler = () => {
     setCurrentScreen(Tags.screenContent_FirstScreen)
   }
 
@@ -54,7 +54,7 @@ export default function App() {
     case Tags.screenContent_GameOverScreen:
       currentScreenContent =
         <GameOverScreen
-          onTryAgain={tryAgainHandler}
+          onGameRestart={onGameRestartHandler}
           numberOfTries={numberOfTries.current} />;
       break;
   }
