@@ -17,13 +17,13 @@ export default function App() {
   const startGameHandler = (chosenNumber) => {
     setUserNumber(chosenNumber)
     setCurrentScreen(Tags.screenContent_GameScreen)
+    numberOfTries.current = 0
   }
 
   const numberOfTries = useRef(0)
 
   const updateNumberOfTriesHandler = () => {
     numberOfTries.current = numberOfTries.current + 1;
-    console.log("numberOfTries.current: " + numberOfTries.current);
   }
 
 
