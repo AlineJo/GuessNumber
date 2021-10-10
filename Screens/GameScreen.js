@@ -51,19 +51,21 @@ const GameScreen = props => {
         }
     }
 
+    const { chosenNumber, onNPCCorrectGuess } = props
+
     useEffect(() => {
-        if (currentGuess == props.chosenNumber) {
+        if (currentGuess == chosenNumber) {
             Alert.alert(
                 "NPC",
                 "Yay, I guessed the number hahaaa!!!",
                 [
                     {
                         text: "wow",
-                        onPress: () => props.onNPCCorrectGuess(),
+                        onPress: () => onNPCCorrectGuess(),
                     }
                 ]);
         }
-    })
+    }, [currentGuess, chosenNumber, onNPCCorrectGuess])
 
 
 
