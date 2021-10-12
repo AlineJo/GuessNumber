@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import MyTextStyle from '../assets/styles/MyTextStyle';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
+import MyText from './MyText';
 
 
 
@@ -9,7 +11,12 @@ const Header = props => {
 
     return (
         <View style={styles.header}>
-            <Text style={styles.headerTitle}>{props.title}</Text>
+            <MyText
+                style={
+                    MyTextStyle(Colors.colorActionBarTitleColor).big_18
+                } >
+                {props.title}
+            </MyText>
         </View>
 
     );
@@ -31,8 +38,8 @@ const styles = StyleSheet.create({
 
     headerTitle: {
         color: Colors.colorActionBarTitleColor,
-        fontSize: 18,
-        fontWeight: 'bold', 
+        fontSize: 28,
+        fontWeight: 'bold',
     }
 });
 
