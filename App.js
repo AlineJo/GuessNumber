@@ -6,37 +6,30 @@ import FirstScreen from './Screens/FirstScreen';
 import GameOverScreen from './Screens/GameOverScreen';
 import GameScreen from './Screens/GameScreen';
 import AppLoading from 'expo-app-loading';
-import * as Font from 'expo-font'
-
-
-
-//load fonts
-const fetchFonts = () => {
-  return (Font.loadAsync({
-    'font-robot-light': require('./assets/fonts/Roboto-Light.ttf'),
-    'font-robot-thin': require('./assets/fonts/Roboto-Thin.ttf'),
-  }))
-}
+import useFonts from './hooks/useFonts';
 
 export default function App() {
 
-  //state to check if data is ready
-  const [isDataReady, setIsDataReady] = useState(false)
+  const [currentScreen, setCurrentScreen] = useState(Tags.screenContent_FirstScreen)
+  const [userNumber, setUserNumber] = useState()
+  const numberOfTries = useRef(0)
 
-  //show AppLoading if data isn't read!
-  if (!isDataReady) {
+  const [IsReady, SetIsReady] = useState(false);
+
+  const LoadFonts = async () => {
+    await useFonts();
+  };
+
+  if (!IsReady) {
     return (
       <AppLoading
-        startAsync={fetchFonts}
-        onFinish={()=> {setIsDataReady(true)}}
-        onError={(err) => console.log(err)}
+        startAsync={LoadFonts}
+        onFinish={() => SetIsReady(true)}
+        onError={() => {}}
       />
-    )
+    );
   }
 
-  const [currentScreen, setCurrentScreen] = useState(Tags.screenContent_FirstScreen)
-
-  const [userNumber, setUserNumber] = useState()
 
   const startGameHandler = (chosenNumber) => {
     setUserNumber(chosenNumber)
@@ -44,7 +37,6 @@ export default function App() {
     numberOfTries.current = 0
   }
 
-  const numberOfTries = useRef(0)
 
   const updateNumberOfTriesHandler = () => {
     numberOfTries.current = numberOfTries.current + 1;
