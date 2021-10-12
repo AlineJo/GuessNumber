@@ -1,18 +1,17 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native'
+import MyTextStyle from '../assets/styles/MyTextStyle';
+import Spacing from '../Constants/Spacing';
+import Tags from '../Constants/Tags';
+
 
 
 const MyText = props => {
-    return (<Text style={{ ...styles.text, ...props.style }}>Hello World{props.childern}</Text>);
+
+    return (<Text style={{...MyTextStyle(props.color).thin_12, ...props.style }}>{props.children}</Text>);
 };
 
 
-const styles = StyleSheet.create({
-    text: {
-        fontFamily: 'font-robot-light',
-        fontSize:20,
-    },
-});
 
 
 export default MyText;
