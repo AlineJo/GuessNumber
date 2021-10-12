@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import MyTextStyle from '../assets/styles/MyTextStyle';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 import Card from './Card';
 import MyButton from './MyButton';
+import MyText from './MyText';
 
 
 const MyNumberContainer = props => {
@@ -20,11 +22,11 @@ const MyNumberContainer = props => {
 
     return (
         <Card style={{...styles.card, ...props.cardStyle}}>
-            <Text style={styles.confiremedOutput}>
+            <MyText style={{...styles.confiremedOutput, ...MyTextStyle(Colors.colorGray).big_16}}>
                 {props.cardTitle}
-            </Text>
+            </MyText>
             <View style={styles.numberContainer}>
-                <Text style={styles.numberTextStyle}>{props.value}</Text>
+                <MyText style={{...styles.numberTextStyle, ...MyTextStyle(Colors.colorSecondary).big_18}}>{props.value}</MyText>
             </View>
 
             {button}
@@ -45,7 +47,6 @@ const styles = StyleSheet.create({
 
     confiremedOutput: {
         color: Colors.colorGray,
-        fontWeight: 'bold',
         textAlign: "center"
     },
 
@@ -70,9 +71,6 @@ const styles = StyleSheet.create({
     },
     numberTextStyle: {
         textAlign: "center",
-        fontSize: Spacing.fontSize_18,
-        color: Colors.colorSecondary,
-        fontWeight: 'bold'
     },
 
     cardButton: {
