@@ -2,12 +2,14 @@ import React from 'react';
 import { TextInput, StyleSheet } from 'react-native'
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
+import Tags from '../Constants/Tags';
 
 
 
 const MyTextInput = props => {
     return (
         <TextInput
+            placeholderTextColor={Colors.colorPlaceholderText}
             {...props}
             style={{ ...styles.input, ...props.style }} />
     )
@@ -22,6 +24,7 @@ const styles = StyleSheet.create({
         marginTop: Spacing.space_10,
         borderBottomWidth: 1,
         borderBottomColor: Colors.colorInputBorder,
+        fontFamily: Tags.font_RobotoThin,
 
     },
 
