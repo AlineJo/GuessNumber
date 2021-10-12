@@ -13,14 +13,13 @@ import MyTextInput from '../Componenets/MyTextInput';
 import MyText from '../Componenets/MyText';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
+import Tags from '../Constants/Tags';
+import MyTextStyle from '../assets/styles/MyTextStyle'
 
 
 const FirstScreen = props => {
-
     const [isConfirmed, setIsConfirmed] = useState(false)
-
     const [choosenNumber, setChoosenNumber] = useState()
-
     const [inputValue, updateInputValue] = useState("")
 
     const onChangeTextListener = text => {
@@ -61,11 +60,17 @@ const FirstScreen = props => {
         <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
 
             <View style={styles.root}>
-                <MyText fontFamily='font-robot-thin' ></MyText>
-                <MyText fontFamily='font-robot-light' ></MyText>
-                <Text style={styles.title}>Start a New Game!</Text>
+                <MyText
+                    style={{ ...styles.title, ...MyTextStyle('black').thin_24 }}
+                    color='black' >
+                    Start a New Game!
+                 </MyText>
+
                 <Card>
-                    <Text >Select a Number:</Text>
+                    <MyText
+                        style={MyTextStyle('black').thin_16} >
+                        Select a Number: </MyText>
+
                     <MyTextInput
                         placeholder="enter a number"
                         onChangeText={onChangeTextListener}
@@ -101,8 +106,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        marginTop: Spacing.space_10,
-        fontSize: Spacing.fontSize_18,
+        marginTop: Spacing.space_32,
     },
 
     buttonsHolder: {
@@ -121,8 +125,6 @@ const styles = StyleSheet.create({
     buttonReset: {
         backgroundColor: Colors.colorButtonCancel
     },
-
-
 
 });
 
