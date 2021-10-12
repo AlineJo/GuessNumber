@@ -29,6 +29,13 @@ const Spacing = {
 
     
     fontSize_18 :18,
+
+    fontSize_Small_12: 12,
+    fontSize_Small_14: 14,
+    fontSize_Normal_16: 16,
+    fontSize_Normal_18: 18,
+    fontSize_Big_22: 22,
+    fontSize_Big_24: 24,
 }
 
 

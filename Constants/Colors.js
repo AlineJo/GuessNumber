@@ -17,7 +17,8 @@ const Colors = {
     colorCardBorderColor:'#f8f8f8',
     colorCardBorderColor2:'#f0f0f0',
 
-    colorInputBorder:'#c3c3c3'
+    colorInputBorder:'#c3c3c3',
+    colorPlaceholderText:'#777',
 
 
 
