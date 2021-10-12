@@ -75,33 +75,33 @@ const MyTextStyle = (color) => StyleSheet.create({
     // roboto big styles
     big_12: {
         color: color,
-        fontFamily: Tags.font_RobotoBig,
+        fontFamily: Tags.font_RobotoBold,
         fontSize: Spacing.fontSize_Small_12,
     },
     big_14: {
         color: color,
-        fontFamily: Tags.font_RobotoBig,
+        fontFamily: Tags.font_RobotoBold,
         fontSize: Spacing.fontSize_Small_14,
     },
     big_16: {
         color: color,
-        fontFamily: Tags.font_RobotoBig,
+        fontFamily: Tags.font_RobotoBold,
         fontSize: Spacing.fontSize_Normal_16,
     },
     big_18: {
         color: color,
-        fontFamily: Tags.font_RobotoBig,
-        fontSize: Spacing.fontSize_Normal_16,
+        fontFamily: Tags.font_RobotoBold,
+        fontSize: Spacing.fontSize_Normal_18,
     },
 
     big_22: {
         color: color,
-        fontFamily: Tags.font_RobotoBig,
+        fontFamily: Tags.font_RobotoBold,
         fontSize: Spacing.fontSize_Big_22,
     },
     big_24: {
         color: color,
-        fontFamily: Tags.font_RobotoBig,
+        fontFamily: Tags.font_RobotoBold,
         fontSize: Spacing.fontSize_Big_24,
     },
 
