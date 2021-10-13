@@ -8,6 +8,7 @@ const Tags = {
     font_RobotoLight: 'font-roboto-light',
     font_RobotoBold: 'font-roboto-bold',
 
+    img_happyPC: require('../assets/imgs/happyPC.png'),
 
 }
 
