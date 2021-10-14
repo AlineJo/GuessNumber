@@ -12,7 +12,8 @@ export default function App() {
 
   const [currentScreen, setCurrentScreen] = useState(Tags.screenContent_FirstScreen)
   const [userNumber, setUserNumber] = useState()
-  const numberOfTries = useRef(0)
+  const numberOfRounds = useRef(0)
+  const [roundsHistory, updateRoundsHistory] = useState([])
 
   const [IsReady, SetIsReady] = useState(false);
 
@@ -25,7 +26,7 @@ export default function App() {
       <AppLoading
         startAsync={LoadFonts}
         onFinish={() => SetIsReady(true)}
-        onError={() => {}}
+        onError={() => { }}
       />
     );
   }
@@ -34,17 +35,23 @@ export default function App() {
   const startGameHandler = (chosenNumber) => {
     setUserNumber(chosenNumber)
     setCurrentScreen(Tags.screenContent_GameScreen)
-    numberOfTries.current = 0
+    numberOfRounds.current = 0
   }
 
 
-  const updateNumberOfTriesHandler = () => {
-    numberOfTries.current = numberOfTries.current + 1;
+  const updateNumberOfRoundsHandler = () => {
+    numberOfRounds.current = numberOfRounds.current + 1;
+    console.log('nor: '+numberOfRounds);
   }
 
 
   const gameOverHandler = () => {
+    console.log('nor: '+numberOfRounds.current);
+
     setCurrentScreen(Tags.screenContent_GameOverScreen)
+    // updateRoundsHistory(currentArray => {
+    //   [numberOfRounds.current, ...currentArray]
+    // })
   }
 
   const onGameRestartHandler = () => {
@@ -63,7 +70,8 @@ export default function App() {
         <GameScreen
           onNPCCorrectGuess={gameOverHandler}
           chosenNumber={userNumber}
-          upadateNumberOfTries={updateNumberOfTriesHandler}
+          upadateNumberOfRounds={updateNumberOfRoundsHandler}
+          roundsHistory={roundsHistory}
         />;
       break;
 
@@ -71,7 +79,7 @@ export default function App() {
       currentScreenContent =
         <GameOverScreen
           onGameRestart={onGameRestartHandler}
-          numberOfTries={numberOfTries.current} />;
+          numberOfRounds={numberOfRounds.current} />;
       break;
   }
 
