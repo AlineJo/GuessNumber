@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native'
+import { View, StyleSheet, Alert, FlatList } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
 import MyNumberContainer from '../Componenets/MyNumberContainer'
@@ -32,7 +32,7 @@ const GameScreen = props => {
         if (currentGuess > props.chosenNumber) {
             currentHigh.current = currentGuess
             setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current, currentGuess))
-            props.upadateNumberOfTries();
+            props.upadateNumberOfRounds();
 
         } else {
             Alert.alert('Common !!!', "Please be honset!!!", [{ text: 'Sorry', style: 'cancel' }]);
@@ -45,7 +45,7 @@ const GameScreen = props => {
         if (currentGuess < props.chosenNumber) {
             currentLow.current = currentGuess
             setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current, currentGuess))
-            props.upadateNumberOfTries();
+            props.upadateNumberOfRounds();
         }
         else {
             Alert.alert('Common !!!', "Please be honset!!!", [{ text: 'Sorry', style: 'cancel' }]);
@@ -53,6 +53,8 @@ const GameScreen = props => {
     }
 
     const { chosenNumber, onNPCCorrectGuess } = props
+
+
 
     useEffect(() => {
         if (currentGuess == chosenNumber) {
@@ -77,11 +79,10 @@ const GameScreen = props => {
             cardTitle="NPC guessed :" value={currentGuess} />
         <Card style={styles.card}>
             <MyButton style={{ ...styles.button, ...styles.buttonLower }} onPress={onLowerPressed}>
-                <Ionicons name="md-remove" size={32} color={Colors.colorWhite}/>
+                <Ionicons name="md-remove" size={32} color={Colors.colorWhite} />
             </MyButton>
             <MyButton style={{ ...styles.button, ...styles.buttonGreater }} onPress={onGreaterPressed}>
-            <Ionicons name="md-add" size={32} color={Colors.colorWhite}/>
-
+                <Ionicons name="md-add" size={32} color={Colors.colorWhite} />
             </MyButton>
         </Card>
 
@@ -90,18 +91,18 @@ const GameScreen = props => {
 
 
 const styles = StyleSheet.create({
-            root: {
-            flex: 1,
+    root: {
+        flex: 1,
         padding: Spacing.space_10,
         alignItems: 'center',
     },
 
     numberContainer: {
-            height: Spacing.space_104,
+        height: Spacing.space_104,
     },
 
     card: {
-            width: Spacing.spacePercent_95,
+        width: Spacing.spacePercent_95,
         height: Spacing.space_96,
         paddingVertical: Spacing.space_4,
 
@@ -111,15 +112,16 @@ const styles = StyleSheet.create({
     },
 
     button: {
-            width: Spacing.space_132,
+        width: Spacing.space_132,
     },
 
     buttonLower: {
-            backgroundColor: Colors.colorButtonPrimary
+        backgroundColor: Colors.colorButtonPrimary
     },
     buttonGreater: {
-            backgroundColor: Colors.colorButtonSecondary
+        backgroundColor: Colors.colorButtonSecondary
     },
+    
 });
 
 
