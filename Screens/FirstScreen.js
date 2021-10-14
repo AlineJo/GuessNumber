@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    View, Text,
+    View,
     StyleSheet,
     TouchableWithoutFeedback,
     Keyboard,
@@ -13,7 +13,6 @@ import MyTextInput from '../Componenets/MyTextInput';
 import MyText from '../Componenets/MyText';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
-import Tags from '../Constants/Tags';
 import MyTextStyle from '../assets/styles/MyTextStyle'
 
 
@@ -90,7 +89,7 @@ const FirstScreen = props => {
                 </Card>
 
                 {confiremedOutput}
-
+                
             </View>
 
         </TouchableWithoutFeedback>
