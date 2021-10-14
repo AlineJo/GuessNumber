@@ -5,6 +5,7 @@ import MyButton from '../Componenets/MyButton';
 import MyNumberContainer from '../Componenets/MyNumberContainer'
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
+import { Ionicons } from '@expo/vector-icons'
 
 const generateRandomBetween = (min, max, exclude) => {
     min = Math.ceil(min)
@@ -75,8 +76,13 @@ const GameScreen = props => {
             cardStyle={styles.numberContainer}
             cardTitle="NPC guessed :" value={currentGuess} />
         <Card style={styles.card}>
-            <MyButton style={{ ...styles.button, ...styles.buttonLower }} title="Lower" onPress={onLowerPressed} />
-            <MyButton style={{ ...styles.button, ...styles.buttonGreater }} title="Greater" onPress={onGreaterPressed} />
+            <MyButton style={{ ...styles.button, ...styles.buttonLower }} onPress={onLowerPressed}>
+                <Ionicons name="md-remove" size={32} color={Colors.colorWhite}/>
+            </MyButton>
+            <MyButton style={{ ...styles.button, ...styles.buttonGreater }} onPress={onGreaterPressed}>
+            <Ionicons name="md-add" size={32} color={Colors.colorWhite}/>
+
+            </MyButton>
         </Card>
 
     </View>);
@@ -84,18 +90,18 @@ const GameScreen = props => {
 
 
 const styles = StyleSheet.create({
-    root: {
-        flex: 1,
+            root: {
+            flex: 1,
         padding: Spacing.space_10,
         alignItems: 'center',
     },
 
     numberContainer: {
-        height: Spacing.space_104,
+            height: Spacing.space_104,
     },
 
     card: {
-        width: Spacing.spacePercent_95,
+            width: Spacing.spacePercent_95,
         height: Spacing.space_96,
         paddingVertical: Spacing.space_4,
 
@@ -105,14 +111,14 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        width: Spacing.space_132,
+            width: Spacing.space_132,
     },
 
     buttonLower: {
-        backgroundColor: Colors.colorButtonPrimary
+            backgroundColor: Colors.colorButtonPrimary
     },
     buttonGreater: {
-        backgroundColor: Colors.colorButtonSecondary
+            backgroundColor: Colors.colorButtonSecondary
     },
 });
 
