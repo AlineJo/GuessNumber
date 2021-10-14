@@ -10,9 +10,15 @@ import MyText from './MyText';
 const MyButton = props => {
     return (<View>
 
-        <TouchableOpacity style={{...styles.button, ...props.style}} onPress={props.onPress} >
+        <TouchableOpacity style={{ ...styles.button, ...props.style }} onPress={props.onPress} >
             <View>
-                <MyText style={{...styles.buttonText, ...styles.textStyle, ...MyTextStyle(Colors.colorWhite).big_16}}>{props.title}</MyText>
+                <MyText
+                    style={{
+                        ...styles.buttonText,
+                        ...styles.textStyle,
+                        ...MyTextStyle(Colors.colorWhite).big_16
+                    }}>
+                    {props.title} {props.children}</MyText>
             </View>
         </TouchableOpacity>
 
@@ -22,7 +28,7 @@ const MyButton = props => {
 
 const styles = StyleSheet.create({
     button: {
-        width:Spacing.spacePercent_100,
+        width: Spacing.spacePercent_100,
         backgroundColor: Colors.colorButtonPrimary,
         paddingVertical: Spacing.space_8,
         paddingHorizontal: Spacing.space_16
