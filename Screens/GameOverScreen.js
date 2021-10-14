@@ -12,8 +12,8 @@ const GameOverScreen = props => {
         <MyCircleImage imgContainer={styles.imgContainer} src={Tags.img_happyPC} />
         <MyNumberContainer
             cardStyle={styles.card}
-            cardTitle="Number of tries it took NPC to guess the correct number is"
-            value={props.numberOfTries}
+            cardTitle="Number of rounds it took NPC to guess the correct number is"
+            value={props.numberOfRounds}
             buttonVisible={true}
             buttonTitle="Try Again"
             onButtonPressed={props.onGameRestart}
