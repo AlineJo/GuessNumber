@@ -48,7 +48,7 @@ export default function App() {
     if (roundsHistory.length) {
       id = (roundsHistory.length + 1) + ''
     } else {
-      id = '0'
+      id = '1'
     }
     const item = {
       id: id,
@@ -59,12 +59,16 @@ export default function App() {
   }
 
   const gameOverHandler = () => {
-    setCurrentScreen(Tags.screenContent_GameOverScreen)
+
+    setUserNumber(-1)
 
     updateRoundsHistory((currentArray) => {
-      currentArray.push(roundsItem)
+      currentArray.push(roundsItem())
       return currentArray
     })
+
+    setCurrentScreen(Tags.screenContent_GameOverScreen)
+
   }
 
   const onGameRestartHandler = () => {
@@ -76,7 +80,7 @@ export default function App() {
   switch (currentScreen) {
     case Tags.screenContent_FirstScreen:
       currentScreenContent =
-        <FirstScreen onStartGamePressed={startGameHandler} roundsHistory={roundsHistory} />;
+        <FirstScreen onStartGamePressed={startGameHandler} />;
       break;
 
     case Tags.screenContent_GameScreen:
