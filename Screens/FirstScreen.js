@@ -5,6 +5,7 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
     Alert,
+    FlatList,
 } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
@@ -89,7 +90,19 @@ const FirstScreen = props => {
                 </Card>
 
                 {confiremedOutput}
-                
+
+                {console.log(props.roundsHistory)}
+                <FlatList
+                    data={props.roundsHistory}
+                    renderItem={itemData => {
+                        return (
+                            <MyText style={MyTextStyle('black').big_24}>{itemData.item.title}</MyText>
+                        )
+                    }}
+                    keyExtractor={(item) => item.id}
+                />
+
+
             </View>
 
         </TouchableWithoutFeedback>
