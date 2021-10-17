@@ -41,17 +41,30 @@ export default function App() {
 
   const updateNumberOfRoundsHandler = () => {
     numberOfRounds.current = numberOfRounds.current + 1;
-    console.log('nor: '+numberOfRounds);
   }
 
+  const roundsItem = () => {
+    let id
+    if (roundsHistory.length) {
+      id = (roundsHistory.length + 1) + ''
+    } else {
+      id = '0'
+    }
+    const item = {
+      id: id,
+      title: numberOfRounds.current
+    }
+
+    return item
+  }
 
   const gameOverHandler = () => {
-    console.log('nor: '+numberOfRounds.current);
-
     setCurrentScreen(Tags.screenContent_GameOverScreen)
-    // updateRoundsHistory(currentArray => {
-    //   [numberOfRounds.current, ...currentArray]
-    // })
+
+    updateRoundsHistory((currentArray) => {
+      currentArray.push(roundsItem)
+      return currentArray
+    })
   }
 
   const onGameRestartHandler = () => {
@@ -62,7 +75,8 @@ export default function App() {
 
   switch (currentScreen) {
     case Tags.screenContent_FirstScreen:
-      currentScreenContent = <FirstScreen onStartGamePressed={startGameHandler} />;
+      currentScreenContent =
+        <FirstScreen onStartGamePressed={startGameHandler} roundsHistory={roundsHistory} />;
       break;
 
     case Tags.screenContent_GameScreen:
