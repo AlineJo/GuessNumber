@@ -6,6 +6,7 @@ import MyNumberContainer from '../Componenets/MyNumberContainer'
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 import { Ionicons } from '@expo/vector-icons'
+import MyRoundsFlatList from '../Componenets/MyRoundsFlatList';
 
 const generateRandomBetween = (min, max, exclude) => {
     min = Math.ceil(min)
@@ -15,7 +16,7 @@ const generateRandomBetween = (min, max, exclude) => {
     const randomNumber = Math.floor(Math.random() * (max - min) + min)
 
     if (randomNumber == exclude) {
-        generateRandomBetween(min, max, exclude)
+        return generateRandomBetween(min, max, exclude)
     } else
         return randomNumber
 }
@@ -86,6 +87,8 @@ const GameScreen = props => {
             </MyButton>
         </Card>
 
+        <MyRoundsFlatList roundsHistory={props.roundsHistory} />
+
     </View>);
 };
 
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
     buttonGreater: {
         backgroundColor: Colors.colorButtonSecondary
     },
-    
+
 });
 
 
