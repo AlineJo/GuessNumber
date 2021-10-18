@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Header from './Componenets/Header';
 import Tags from './Constants/Tags';
 import FirstScreen from './Screens/FirstScreen';
@@ -52,7 +52,8 @@ export default function App() {
     }
     const item = {
       id: id,
-      title: numberOfRounds.current
+      numberOfRounds: numberOfRounds.current,
+      chosenNumber: userNumber
     }
 
     return item
