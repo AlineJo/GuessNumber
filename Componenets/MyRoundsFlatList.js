@@ -7,13 +7,25 @@ import MyText from './MyText';
 
 
 const FlatListItem = props => (
-    <View style={{ ...styles.listItemContainer, ...props.style}}>
+    <View style={{ ...styles.listItemContainer, ...props.style }}>
         <View style={styles.listItem} >
-            <MyText style={{ ...MyTextStyle('black').thin_18, ...styles.itemIndex }}>{props.item.id}.</MyText>
+            <MyText style={
+                {
+                    ...MyTextStyle('black').thin_18,
+                    ...styles.itemIndex
+                }}>
+                {props.item.id}.
+                </MyText>
 
             <View style={styles.itemValue}>
-                <View style={{ ...styles.circle, ...{ marginEnd: 8 } }}>
-                    <MyText style={{ ...MyTextStyle(Colors.colorPrimary).light_24, ...styles.itemValueText }}>{props.item.numberOfRounds}</MyText>
+                <View style={{ ...styles.circle, ...{ marginEnd: Spacing.space_8 } }}>
+                    <MyText style={
+                        {
+                            ...MyTextStyle(Colors.colorPrimary).light_24,
+                            ...styles.itemValueText
+                        }}>
+                        {props.item.numberOfRounds}
+                    </MyText>
                 </View>
 
                 <View style={styles.circle}>
@@ -43,12 +55,12 @@ const MyRoundsFlatList = props => {
     let flatListHeader
 
     if (props.roundsHistory) {
-        flatListHeader = <FlatListItem style={{ marginTop: 16, marginBottom: 8 }} item={headerItem} />
+        flatListHeader = <FlatListItem style={{ marginTop: Spacing.space_16, marginBottom: Spacing.space_8 }} item={headerItem} />
     }
 
     return (
 
-        <View style={{flex:1, width: 300, justifyContent: 'center' }}>
+        <View style={{ flex: 1, width: Spacing.space_300, justifyContent: 'center' }}>
 
             {flatListHeader}
             <View style={styles.flatListContainer}>
@@ -68,37 +80,36 @@ const MyRoundsFlatList = props => {
 const styles = StyleSheet.create({
 
     flatListContainer: {
-        flex:1,
-        height: 350,
-        width: 300,
+        flex: 1,
+        width: Spacing.space_300,
         alignContent: "center"
     },
 
     flatList: {
         width: Spacing.spacePercent_100,
-        marginTop: 4,
-        paddingBottom: 32,
+        marginTop: Spacing.space_4,
+        paddingBottom: Spacing.space_4,
     },
 
     listItemContainer: {
-        width: '100%',
+        width: Spacing.spacePercent_100,
         alignItems: 'center',
         justifyContent: 'center',
     },
 
     listItem: {
-        width: 156,
-        height: 42,
+        width: Spacing.space_156,
+        height: Spacing.space_42,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10,
+        marginTop: Spacing.space_10,
         backgroundColor: Colors.colorCardBorderColor2,
-        borderRadius: 20,
+        borderRadius: Spacing.space_20,
     },
 
     itemIndex: {
-        marginStart: 8,
+        marginStart: Spacing.space_8,
         fontSize: Spacing.fontSize_Normal_18,
     },
 
@@ -110,13 +121,13 @@ const styles = StyleSheet.create({
 
 
     circle: {
-        height: 36,
-        width: 36,
+        height: Spacing.space_36,
+        width: Spacing.space_36,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.colorWhite,
-        borderRadius: 50,
+        borderRadius: Spacing.space_50,
     },
 
     itemValueText: {
