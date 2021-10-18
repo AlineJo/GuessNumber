@@ -44,7 +44,7 @@ const GameScreen = props => {
 
     const onGreaterPressed = () => {
         if (currentGuess < props.chosenNumber) {
-            currentLow.current = currentGuess
+            currentLow.current = currentGuess + 1
             setCurrentGuess(generateRandomBetween(currentLow.current, currentHigh.current, currentGuess))
             props.upadateNumberOfRounds();
         }
@@ -86,7 +86,6 @@ const GameScreen = props => {
                 <Ionicons name="md-add" size={32} color={Colors.colorWhite} />
             </MyButton>
         </Card>
-
         <MyRoundsFlatList roundsHistory={props.roundsHistory} />
 
     </View>);
