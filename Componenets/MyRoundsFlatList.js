@@ -6,14 +6,24 @@ import Spacing from '../Constants/Spacing';
 import MyText from './MyText';
 
 
-const FlatListItem = (props) => (
-    <View style={styles.listItemContainer}>
+const FlatListItem = props => (
+    <View style={{...styles.listItemContainer, ...props.style}}>
         <View style={styles.listItem} >
-            <MyText style={{ ...MyTextStyle('black').thin_18, ...styles.itemIndex }}>{props.index}.</MyText>
+            <MyText style={{ ...MyTextStyle('black').thin_18, ...styles.itemIndex }}>{props.item.id}.</MyText>
 
             <View style={styles.itemValue}>
+                <View style={{ ...styles.circle, ...{ marginEnd: 8 } }}>
+                    <MyText style={{ ...MyTextStyle(Colors.colorPrimary).light_24, ...styles.itemValueText }}>{props.item.numberOfRounds}</MyText>
+                </View>
+
                 <View style={styles.circle}>
-                    <MyText style={{ ...MyTextStyle(Colors.colorSecondary).light_24, ...styles.itemValueText }}>{props.title}</MyText>
+                    <MyText
+                        style={{
+                            ...MyTextStyle(Colors.colorSecondary).light_24,
+                            ...styles.itemValueText
+                        }}>
+                        {props.item.chosenNumber}
+                    </MyText>
                 </View>
             </View>
         </View>
@@ -22,39 +32,64 @@ const FlatListItem = (props) => (
 
 const MyRoundsFlatList = props => {
 
-    const renderItem = ({ item }) => (<FlatListItem index={item.id} title={item.title} />);
+    const renderItem = ({ item }) => (<FlatListItem item={item} />);
+
+    const headerItem = {
+        id: "i",
+        numberOfRounds: "NR",
+        chosenNumber: "CN"
+    }
+
+    let flatListHeader
+
+    if (props.roundsHistory) {
+        flatListHeader =  <FlatListItem style={{marginTop:16, marginBottom:8}} item={headerItem} />
+    }
 
     return (
-        <FlatList
-            style={styles.flatList}
-            data={props.roundsHistory}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-        />
+        <View>
+
+            {flatListHeader}
+
+            <FlatList
+                style={styles.flatList}
+                data={props.roundsHistory}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+            />
+
+        </View>
+
     );
 };
 
 
 const styles = StyleSheet.create({
+
+    flatListHeader: {
+        marginTop: 32,
+
+    },
+
     flatList: {
         width: Spacing.spacePercent_95,
-        marginTop: 32,
+        marginTop: 4,
         paddingBottom: 32,
     },
 
-    listItemContainer:{
+    listItemContainer: {
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
     },
 
     listItem: {
-        width: 100,
+        width: 156,
         height: 42,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 10,
+        marginTop: 10,
         backgroundColor: Colors.colorCardBorderColor2,
         borderRadius: 20,
     },
@@ -66,12 +101,12 @@ const styles = StyleSheet.create({
 
     itemValue: {
         flex: 0.9,
-        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        flexDirection: 'row'
     },
 
 
     circle: {
-        padding: 0,
         height: 36,
         width: 36,
         flexDirection: 'row',
