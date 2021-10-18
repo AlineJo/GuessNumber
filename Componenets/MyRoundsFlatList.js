@@ -7,7 +7,7 @@ import MyText from './MyText';
 
 
 const FlatListItem = props => (
-    <View style={{...styles.listItemContainer, ...props.style}}>
+    <View style={{ ...styles.listItemContainer, ...props.style}}>
         <View style={styles.listItem} >
             <MyText style={{ ...MyTextStyle('black').thin_18, ...styles.itemIndex }}>{props.item.id}.</MyText>
 
@@ -43,21 +43,22 @@ const MyRoundsFlatList = props => {
     let flatListHeader
 
     if (props.roundsHistory) {
-        flatListHeader =  <FlatListItem style={{marginTop:16, marginBottom:8}} item={headerItem} />
+        flatListHeader = <FlatListItem style={{ marginTop: 16, marginBottom: 8 }} item={headerItem} />
     }
 
     return (
-        <View>
+
+        <View style={{flex:1, width: 300, justifyContent: 'center' }}>
 
             {flatListHeader}
-
-            <FlatList
-                style={styles.flatList}
-                data={props.roundsHistory}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-            />
-
+            <View style={styles.flatListContainer}>
+                <FlatList
+                    style={styles.flatList}
+                    data={props.roundsHistory}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                />
+            </View>
         </View>
 
     );
@@ -66,13 +67,15 @@ const MyRoundsFlatList = props => {
 
 const styles = StyleSheet.create({
 
-    flatListHeader: {
-        marginTop: 32,
-
+    flatListContainer: {
+        flex:1,
+        height: 350,
+        width: 300,
+        alignContent: "center"
     },
 
     flatList: {
-        width: Spacing.spacePercent_95,
+        width: Spacing.spacePercent_100,
         marginTop: 4,
         paddingBottom: 32,
     },
