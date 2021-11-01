@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet, Alert, FlatList } from 'react-native'
+import { View, StyleSheet, Alert, ScrollView } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
 import MyNumberContainer from '../Componenets/MyNumberContainer'
@@ -73,22 +73,27 @@ const GameScreen = props => {
 
 
 
-    return (<View style={styles.root}>
+    return (
+        <ScrollView>
+            <View style={styles.root}>
 
-        <MyNumberContainer
-            cardStyle={styles.numberContainer}
-            cardTitle="NPC guessed :" value={currentGuess} />
-        <Card style={styles.card}>
-            <MyButton style={{ ...styles.button, ...styles.buttonLower }} onPress={onLowerPressed}>
-                <Ionicons name="md-remove" size={32} color={Colors.colorWhite} />
-            </MyButton>
-            <MyButton style={{ ...styles.button, ...styles.buttonGreater }} onPress={onGreaterPressed}>
-                <Ionicons name="md-add" size={32} color={Colors.colorWhite} />
-            </MyButton>
-        </Card>
-        <MyRoundsFlatList roundsHistory={props.roundsHistory} />
+                <MyNumberContainer
+                    cardStyle={styles.numberContainer}
+                    cardTitle="NPC guessed :" value={currentGuess} />
+                <Card style={styles.card}>
+                    <MyButton style={{ ...styles.button, ...styles.buttonLower }} onPress={onLowerPressed}>
+                        <Ionicons name="md-remove" size={32} color={Colors.colorWhite} />
+                    </MyButton>
+                    <MyButton style={{ ...styles.button, ...styles.buttonGreater }} onPress={onGreaterPressed}>
+                        <Ionicons name="md-add" size={32} color={Colors.colorWhite} />
+                    </MyButton>
+                </Card>
+                <MyRoundsFlatList roundsHistory={props.roundsHistory} />
 
-    </View>);
+            </View>
+
+        </ScrollView>
+    );
 };
 
 
