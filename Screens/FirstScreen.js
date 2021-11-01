@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     StyleSheet,
     TouchableWithoutFeedback,
     Keyboard,
     Alert,
+    Dimensions,
+    ScrollView,
 } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
@@ -13,7 +15,7 @@ import MyTextInput from '../Componenets/MyTextInput';
 import MyText from '../Componenets/MyText';
 import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
-import MyTextStyle from '../assets/styles/MyTextStyle'
+import MyTextStyle from '../assets/styles/MyTextStyle';
 
 
 const FirstScreen = props => {
@@ -48,64 +50,90 @@ const FirstScreen = props => {
     let confiremedOutput
     if (isConfirmed) {
         confiremedOutput =
-            <MyNumberContainer cardTitle="You selected:"
+            <MyNumberContainer
+                cardStyle={styles.MyNumberContainer}
+                cardTitle="You selected:"
                 value={choosenNumber} buttonTitle="Start Game"
                 buttonVisible={true}
                 onButtonPressed={() => props.onStartGamePressed(choosenNumber)}
-            />;
+            />
     }
 
+    const [buttonWidth, updateButtonWidth] = useState(Dimensions.get('window').width / 3)
+
+    useEffect(() => {
+        const onScreenRotation = () => {
+            updateButtonWidth(Dimensions.get('window').width / 3)
+        }
+        const subscribeToAddEventListener = Dimensions.addEventListener('change', onScreenRotation);
+
+        return () => {
+            subscribeToAddEventListener.remove();
+        }
+    }
+    );
+
+
     return (
-        <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
+        <ScrollView>
+            <TouchableWithoutFeedback onPress={() => { Keyboard.dismiss(); }}>
+                <View style={styles.root}>
 
-            <View style={styles.root}>
-                <MyText
-                    style={{ ...styles.title, ...MyTextStyle('black').thin_24 }}
-                    color='black' >
-                    Start a New Game!
-                 </MyText>
-
-                <Card>
                     <MyText
-                        style={MyTextStyle('black').thin_16} >
-                        Select a Number: </MyText>
+                        style={{ ...styles.title, ...MyTextStyle('black').thin_24 }}>
+                        Start a New Game!
+                     </MyText>
+                    <Card style={styles.card}>
+                        <MyText
+                            style={MyTextStyle('black').thin_16} >
+                            Select a Number:
+                            </MyText>
 
-                    <MyTextInput
-                        placeholder="enter a number"
-                        onChangeText={onChangeTextListener}
-                        keyboardType="number-pad"
-                        blurOnSubmit
-                        autoCorrect={false}
-                        maxLength={2}
-                        value={inputValue}
-                    />
-                    <View style={styles.buttonsHolder}>
+                        <MyTextInput
+                            placeholder="enter a number"
+                            onChangeText={onChangeTextListener}
+                            keyboardType="number-pad"
+                            blurOnSubmit
+                            autoCorrect={false}
+                            maxLength={2}
+                            value={inputValue}
+                        />
+                        <View style={styles.buttonsHolder}>
 
-                        <MyButton style={{ ...styles.button, ...styles.buttonReset }} title="Reset" onPress={onResetPressed} />
-                        <MyButton style={styles.button} title="Confirm" onPress={onConfirmPressed} />
+                            <MyButton style={{ ...{ width: buttonWidth }, ...styles.button, ...styles.buttonReset }} title="Reset" onPress={onResetPressed} />
+                            <MyButton style={{ ...{ width: buttonWidth }, ...styles.button }} title="Confirm" onPress={onConfirmPressed} />
 
-                    </View>
+                        </View>
 
-                </Card>
+                    </Card>
 
-                {confiremedOutput}
+                    {confiremedOutput}
 
-            </View>
+                </View>
 
-        </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+
+        </ScrollView>
     );
 };
 
+const marginTop = Dimensions.get('window').height * 0.01
 
 const styles = StyleSheet.create({
     root: {
-        flex: 1,
+        //flex: 1,
+        height: Dimensions.get('window').height,
         padding: Spacing.space_10,
         alignItems: 'center',
     },
 
     title: {
-        marginTop: Spacing.space_32,
+        marginTop: marginTop,
+    },
+
+    card: {
+        marginTop: 16,
+        minWidth: 300,
     },
 
     buttonsHolder: {
@@ -118,11 +146,14 @@ const styles = StyleSheet.create({
 
     button: {
         marginTop: Spacing.space_32,
-        width: 132,
     },
 
     buttonReset: {
         backgroundColor: Colors.colorButtonCancel
+    },
+
+    MyNumberContainer: {
+        marginTop: 16,
     },
 
 });
