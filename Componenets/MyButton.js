@@ -28,7 +28,6 @@ const MyButton = props => {
 
 const styles = StyleSheet.create({
     button: {
-        width: Spacing.spacePercent_100,
         backgroundColor: Colors.colorButtonPrimary,
         paddingVertical: Spacing.space_8,
         paddingHorizontal: Spacing.space_16
