@@ -66,9 +66,14 @@ const FirstScreen = props => {
             updateButtonWidth(Dimensions.get('window').width / 3)
         }
         const subscribeToAddEventListener = Dimensions.addEventListener('change', onScreenRotation);
+        console.log("subscribeToAddEventListener Added");
 
         return () => {
-            subscribeToAddEventListener.remove();
+            if (typeof (subscribeToAddEventListener) !== 'undefined'
+                && subscribeToAddEventListener != null) {
+                console.log("subscribeToAddEventListener Removed");
+                subscribeToAddEventListener.remove();
+            }
         }
     }
     );
