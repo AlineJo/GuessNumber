@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, StyleSheet, Alert, ScrollView } from 'react-native'
+import { View, StyleSheet, Alert, ScrollView, Dimensions } from 'react-native'
 import Card from '../Componenets/Card';
 import MyButton from '../Componenets/MyButton';
 import MyNumberContainer from '../Componenets/MyNumberContainer'
@@ -72,28 +72,99 @@ const GameScreen = props => {
     }, [currentGuess, chosenNumber, onNPCCorrectGuess])
 
 
+    const layoutPortrait =
+        <View style={styles.root}>
 
-    return (
-        <ScrollView>
-            <View style={styles.root}>
+            <MyNumberContainer
+                cardStyle={styles.numberContainer}
+                cardTitle="NPC guessed :" value={currentGuess} />
+            <Card style={styles.card}>
+                <MyButton style={{ ...styles.button, ...styles.buttonLower }} onPress={onLowerPressed}>
+                    <Ionicons name="md-remove" size={32} color={Colors.colorWhite} />
+                </MyButton>
+                <MyButton style={{ ...styles.button, ...styles.buttonGreater }} onPress={onGreaterPressed}>
+                    <Ionicons name="md-add" size={32} color={Colors.colorWhite} />
+                </MyButton>
+            </Card>
+            <MyRoundsFlatList roundsHistory={props.roundsHistory} />
+
+        </View>
+
+
+    const layoutLandscape =
+        <View style={styles.root}>
+
+            <View style={{ width: "100%", background: '#F00', flexDirection: 'row', alignContent: 'space-between', justifyContent: 'center' }} >
+                <MyButton style={{ ...styles.button, ...styles.buttonLower, ...styles.buttonHorizontal }} onPress={onLowerPressed}>
+                    <Ionicons name="md-remove" size={32} color={Colors.colorWhite} />
+                </MyButton>
 
                 <MyNumberContainer
                     cardStyle={styles.numberContainer}
                     cardTitle="NPC guessed :" value={currentGuess} />
-                <Card style={styles.card}>
-                    <MyButton style={{ ...styles.button, ...styles.buttonLower }} onPress={onLowerPressed}>
-                        <Ionicons name="md-remove" size={32} color={Colors.colorWhite} />
-                    </MyButton>
-                    <MyButton style={{ ...styles.button, ...styles.buttonGreater }} onPress={onGreaterPressed}>
-                        <Ionicons name="md-add" size={32} color={Colors.colorWhite} />
-                    </MyButton>
-                </Card>
-                <MyRoundsFlatList roundsHistory={props.roundsHistory} />
+
+                <MyButton style={{ ...styles.button, ...styles.buttonGreater, ...styles.buttonHorizontal }} onPress={onGreaterPressed}>
+                    <Ionicons name="md-add" size={32} color={Colors.colorWhite} />
+                </MyButton>
 
             </View>
 
-        </ScrollView>
+            <MyRoundsFlatList roundsHistory={props.roundsHistory} />
+
+        </View>
+
+
+    const getOrientation = () => {
+
+
+        if (Dimensions.get('window').width <
+            Dimensions.get('window').height) {
+            setLayoutState('portrait')
+        } else {
+            setLayoutState('landscape')
+        }
+
+    }
+
+    const [layoutState, setLayoutState] = useState('portrait');
+
+    let currentLayout = layoutPortrait
+
+
+    useEffect(() => {
+        const onScreenRotation = () => {
+            console.log(layoutState + "....");
+            getOrientation()
+
+        }
+        const subscribeToAddEventListener = Dimensions.addEventListener('change', onScreenRotation);
+        console.log("subscribeToAddEventListener Added");
+
+        return () => {
+            if (typeof (subscribeToAddEventListener) !== 'undefined'
+                && subscribeToAddEventListener != null) {
+                console.log("subscribeToAddEventListener Removed");
+                subscribeToAddEventListener.remove();
+            }
+        }
+    }
     );
+
+
+    if (layoutState == 'portrait') {
+        return (
+            <View style={{ flex: 1 }}>
+                {layoutPortrait}
+            </View>
+        );
+    } else {
+        return (
+            <View style={{ flex: 1 }}>
+                {layoutLandscape}
+            </View>
+        );
+    }
+
 };
 
 
@@ -109,6 +180,7 @@ const styles = StyleSheet.create({
     },
 
     card: {
+        marginTop: 16,
         width: Spacing.spacePercent_95,
         height: Spacing.space_96,
         paddingVertical: Spacing.space_4,
@@ -126,10 +198,18 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.colorButtonPrimary
     },
     buttonGreater: {
+
         backgroundColor: Colors.colorButtonSecondary
+    },
+
+
+    buttonHorizontal: {
+        marginHorizontal: 16,
+        height: Spacing.space_104,
+        justifyContent: 'center'
     },
 
 });
 
 
-export default GameScreen;
+export default GameScreen; 
