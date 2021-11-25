@@ -7,6 +7,7 @@ import Colors from '../Constants/Colors';
 import Spacing from '../Constants/Spacing';
 import { Ionicons } from '@expo/vector-icons'
 import MyRoundsFlatList from '../Componenets/MyRoundsFlatList';
+import * as ScreenOrientation from 'expo-screen-orientation'
 
 const generateRandomBetween = (min, max, exclude) => {
     min = Math.ceil(min)
@@ -22,6 +23,11 @@ const generateRandomBetween = (min, max, exclude) => {
 }
 
 const GameScreen = props => {
+
+    const subcribeToOrientationListener = ScreenOrientation.addOrientationChangeListener((listener) => {
+        console.log(listener.orientationInfo);
+    })
+
     const currentLow = useRef(0)
     const currentHigh = useRef(100)
 
@@ -69,6 +75,9 @@ const GameScreen = props => {
                     }
                 ]);
         }
+
+        return () => { subcribeToOrientationListener.remove }
+
     }, [currentGuess, chosenNumber, onNPCCorrectGuess])
 
 
