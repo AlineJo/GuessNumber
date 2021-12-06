@@ -24,9 +24,7 @@ const generateRandomBetween = (min, max, exclude) => {
 
 const GameScreen = props => {
 
-    const subcribeToOrientationListener = ScreenOrientation.addOrientationChangeListener((listener) => {
-        console.log(listener.orientationInfo);
-    })
+
 
     const currentLow = useRef(0)
     const currentHigh = useRef(100)
@@ -64,6 +62,11 @@ const GameScreen = props => {
 
 
     useEffect(() => {
+        const subcribeToOrientationListener = ScreenOrientation.addOrientationChangeListener((listener) => {
+            console.log(listener.orientationInfo);
+
+        })
+
         if (currentGuess == chosenNumber) {
             Alert.alert(
                 "NPC",
